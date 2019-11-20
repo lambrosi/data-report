@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: file-processor-service
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        concurrency: 2
+        max-concurrency: 4
+        prefetch: 15
+
+application:
+  file-input-extension: .dat
+  file-output-extension: .done.dat
+  path:
+    output-directory: ${user.home}/data/out
+    processed-directory: ${user.home}/data/processed
+  parsing:
+    regex:
+      salesman: '^([0-9]{3})ç([0-9]{10,15})ç([a-zA-Zç ]+)ç([0-9.,]+)$'
+      customer: '^([0-9]{3})ç([0-9]{12,16})ç([a-zA-Z\s]+)ç(.*)$'
+      sale: '^([0-9]{3})ç([0-9]+)ç([^ç]+)ç([a-zA-Zç ]+)$'
+    row-identifier:
+      salesman: '001'
+      customer: '002'
+      sale: '003'
+  messaging:
+    queue: file-received-queue
+    exchange: file-received-exchange
+    topic:
+      file-processed: file-processed
+
+logging:
+  level:
+    org.apache.kafka: WARN
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %-4level [${spring.application.name}] %logger{36} - %m%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %-4level [${spring.application.name}] %logger{36} - %m%n'
+  file: /var/log/file-processor-service.log
