@@ -3,7 +3,9 @@ The purpose of this application is to watch certain directory, read sales files 
 
 ## Execution flow
 This diagram was made to illustrate the flow of execution. The <defaul_directory> is **user.home** environment variable:
-![alt text](https://i.imgur.com/7Zwp9yB.png)
+<p align="center">
+  <img width="731" height="831" src="https://i.imgur.com/Avz8okJ.png">
+</p>
 
 ## Technical decisions
 #### Separation of concerns
