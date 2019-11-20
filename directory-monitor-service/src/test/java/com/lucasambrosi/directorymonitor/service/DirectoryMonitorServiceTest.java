@@ -59,7 +59,7 @@ public class DirectoryMonitorServiceTest {
     }
 
     @Test
-    public void verifyInputDirectoryWithFileWithWrongExtensionTest() throws IOException {
+    void verifyInputDirectoryWithFileWithWrongExtensionTest() throws IOException {
         final String INPUT_DIRECTORY = TEMP_DIRECTORY + "/in2";
         final String PROCESSED_DIRECTORY = TEMP_DIRECTORY + "/pr2";
 
@@ -76,7 +76,7 @@ public class DirectoryMonitorServiceTest {
     }
 
     @Test
-    public void verifyInputDirectoryWithErrorWhenSendMessageToRabbit() throws IOException {
+    void verifyInputDirectoryWithErrorWhenSendMessageToRabbit() throws IOException {
         mockRabbitProducerError("file4.dat");
         final String INPUT_DIRECTORY = TEMP_DIRECTORY + "/in3";
         final String PROCESSED_DIRECTORY = TEMP_DIRECTORY + "/pr3";
@@ -119,7 +119,5 @@ public class DirectoryMonitorServiceTest {
         for (String directory : directories) {
             FileSystemUtils.deleteRecursively(Paths.get(directory));
         }
-//        FileSystemUtils.deleteRecursively(Paths.get(PROCESSED_DIRECTORY));
-//        Files.deleteIfExists(Paths.get(directory, filename));
     }
 }
