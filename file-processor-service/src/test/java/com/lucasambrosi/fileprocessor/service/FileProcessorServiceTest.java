@@ -43,7 +43,7 @@ public class FileProcessorServiceTest {
     private FileProcessedProducer fileProcessedProducer;
 
     @Test
-    public void fileParserArgumentReceivedTest() {
+    void fileParserArgumentReceivedTest() {
         FileContentDto<String> fileContentDto = new FileContentDto<>(FILENAME, getFileContent());
         Mockito.when(fileReader.extractContent(Mockito.any()))
                 .thenReturn(fileContentDto);
@@ -58,7 +58,7 @@ public class FileProcessorServiceTest {
     }
 
     @Test
-    public void reportProcessorArgumentReceivedTest() {
+    void reportProcessorArgumentReceivedTest() {
         FileContentDto<Model> fileContentParsed = parseContentString(new FileContentDto<>(FILENAME, getFileContent()));
         Mockito.when(fileParser.processContent(Mockito.any())).thenReturn(fileContentParsed);
 

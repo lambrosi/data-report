@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class FileWriterTest {
 
-    private static FileWriter fileWriter;
+    private FileWriter fileWriter;
 
     @Test
     void writeReportTest() {
