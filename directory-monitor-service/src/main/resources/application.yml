@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: directory-monitor-service
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
+
+application:
+  monitoring:
+    cron-job: 0/5 * * * * *
+    file-extension: .dat
+    input-directory: ${user.home}/data/in
+    processed-directory: ${user.home}/data/processed
+    processed-success-directory: ${user.home}/data/processed/success
+    processed-error-directory: ${user.home}/data/processed/error
+  messaging:
+    output:
+      exchange: file-received-exchange
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %-4level [${spring.application.name}] %logger{36} - %m%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} - %-4level [${spring.application.name}] %logger{36} - %m%n'
+  file: /var/log/directory-monitor-service.log

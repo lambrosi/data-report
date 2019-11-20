@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'info.solidsoft.pitest' version '1.4.5'
+	id 'application'
+	id 'java'
+}
+
+group = 'com.lucasambrosi'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+mainClassName = 'com.lucasambrosi.directorymonitor.DirectorymonitorApplication'
+
+repositories {
+	mavenCentral()
+}
+
+pitest {
+	targetClasses = ['com.lucasambrosi.directorymonitor.service.*']
+	threads = 4
+	outputFormats = ['XML', 'HTML']
+	timestampedReports = false
+	testPlugin = 'junit5'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+	implementation 'org.pitest:pitest-junit5-plugin:0.8'
+}
+
+test {
+	useJUnitPlatform()
+}
